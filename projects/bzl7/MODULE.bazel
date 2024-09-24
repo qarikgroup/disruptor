@@ -2,7 +2,7 @@ module(
     name = "bzl7",
 )
 
-RULES_NIX_PKGS_VERSION = "0.11.1"
+RULES_NIX_PKGS_VERSION = "0.12.0"
 
 bazel_dep(name = "aspect_rules_py", version = "0.7.1")
 bazel_dep(name = "gazelle", version = "0.36.0")
@@ -23,7 +23,7 @@ archive_override(
         "https://github.com/tweag/rules_nixpkgs/releases/download/v{0}/rules_nixpkgs-{0}.tar.gz".format(RULES_NIX_PKGS_VERSION),
     ],
     strip_prefix = "rules_nixpkgs-{}/toolchains/cc".format(RULES_NIX_PKGS_VERSION),
-    integrity = "sha256-KlVTSNf4WT/KK/P8bOU8XWKSnegbbCkuI/FsVXwK5Fo=",
+    integrity = "sha256-GtsE3AQWkV/vQndX9CcsT32s7+zu78UPaDrsf36beHo=",
 )
 
 nix_repo = use_extension("@rules_nixpkgs_core//extensions:repository.bzl", "nix_repo")
