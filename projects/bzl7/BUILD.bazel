@@ -1,4 +1,20 @@
 load("@gazelle//:def.bzl", "gazelle")
+load("@rules_proto//proto/private/rules:proto_toolchain_rule.bzl", "proto_toolchain")
+
+proto_toolchain(
+    name = "nixpkgs_protoc_toolchain",
+    proto_compiler = "@nixpkgs_protobuf//:bin/protoc",
+    visibility = ["//visibility:public"],
+)
+
+toolchain(
+    name = "nixpkgs_protobuf_toolchain",
+    toolchain_type = "@rules_proto//proto:toolchain_type",
+    exec_compatible_with = [
+        "@rules_nixpkgs_core//constraints:support_nix"
+    ],
+    toolchain = ":nixpkgs_protoc_toolchain",
+)
 
 # gazelle:prefix github.com/Qarik-Group/disruptor/projects/bzl7
 gazelle(

@@ -8,12 +8,12 @@ bazel_dep(name = "aspect_rules_py", version = "0.7.1")
 bazel_dep(name = "gazelle", version = "0.36.0")
 bazel_dep(name = "grpc", version = "1.62.1")
 bazel_dep(name = "rules_cc", version = "0.0.9")
-bazel_dep(name = "rules_go", version = "0.46.0")
+bazel_dep(name = "rules_go", version = "0.50.1")
 bazel_dep(name = "rules_nixpkgs_cc")
 bazel_dep(name = "rules_nixpkgs_core", version = RULES_NIX_PKGS_VERSION)
-bazel_dep(name = "rules_proto", version = "6.0.0-rc3")
+bazel_dep(name = "rules_proto", version = "6.0.0")
 bazel_dep(name = "rules_python", version = "0.31.0")
-bazel_dep(name = "platforms", version = "0.0.9")
+bazel_dep(name = "platforms", version = "0.0.10")
 bazel_dep(name = "protobuf", version = "26.0.bcr.1")
 
 # fix for extra_flags_per_feature, not published yet to BCR
@@ -63,7 +63,12 @@ cc_library(
 )
 """,
 )
-use_repo(nix_pkg, "boost")
+nix_pkg.attr(
+    name = "nixpkgs_protobuf",
+    attr = "protobuf",
+    repo = "@nixpkgs",
+)
+use_repo(nix_pkg, "boost", "nixpkgs_protobuf")
 
 non_module_deps = use_extension("//toolchains:defs.bzl", "non_module_deps")
 use_repo(
@@ -124,3 +129,5 @@ use_repo(
     go_deps,
     "org_golang_google_grpc",
 )
+
+register_toolchains("//:nixpkgs_protobuf_toolchain")
