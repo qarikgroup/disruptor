@@ -49,7 +49,6 @@ pkgs.mkShell {
     coreutils-full
     curlFull
     direnv
-    bat
     # Add git client to shell, it reads host configuration
     git
     gnutar
