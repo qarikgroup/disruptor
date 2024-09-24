@@ -30,4 +30,4 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-unstable
       - name: Build all
-        run: ./nix-shell.sh -- --run 'cd projects/${{ matrix.project }}; bazel build //...; cat $(bazel info output_base)/external/_main~non_module_deps~gcc_12_info/CC_TOOLCHAIN_INFO'
+        run: ./nix-shell.sh -- --run 'cd projects/${{ matrix.project }}; bazel build //...; cat $(bazel info output_base)/external/_main~non_module_deps~gcc_12_info/CC_TOOLCHAIN_INFO; bat --paging=never $(bazel info output_base)/external/_main~non_module_deps~gcc_12/BUILD.bazel'
